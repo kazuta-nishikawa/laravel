@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// 登録フォーム
+Route::get('/signin', 'MemberController@create')->name('signin.create');
+Route::post('/signin/confirm', 'MemberController@confirm')->name('signin.confirm');
+Route::post('/signin/complete', 'MemberController@complete')->name('signin.complete');
