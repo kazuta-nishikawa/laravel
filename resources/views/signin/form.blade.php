@@ -48,12 +48,17 @@
                     @if (old('gender') == "1")
                         <input type="radio"  name="gender" value="1" checked>男性
                         <input type="radio"  name="gender" value="2">女性
-                    @elseif (old('gender') == "2")
+                    @endif
+
+                    @if (old('gender') == "2")
                         <input type="radio"  name="gender" value="1" >男性
                         <input type="radio"  name="gender" value="2" checked>女性
-                    @else
-                        <input type="radio"  name="gender" value="1" >男性
-                        <input type="radio"  name="gender" value="2" >女性
+                    @endif
+
+                    @if (old('gender') == "")
+                        @foreach (config('master.gender') as $key => $value)
+                            <input type="radio"  name="gender" value="{{ $key }}" >{{ $value }}
+                        @endforeach
                     @endif
                 </div>
             </div>
@@ -80,5 +85,4 @@
     </div>
 
 </main>
-
 @endsection

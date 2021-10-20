@@ -18,7 +18,9 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
+        $members = Member::all();
+        
+        return view("member.index",compact('members'));
     }
 
     /**
@@ -37,28 +39,26 @@ class MemberController extends Controller
         $member = $request->only($formItems);
         $request->session()->put("member", $member);
         $member = $request->session()->get("member");
-        // dd($member);
         return view("signin.confirm",compact('member'));
     }
 
     public function complete(Request $request)
     {
-        $input = $request->session()->get("member");
+        $input = $request->session()->get('member');
         $member = new Member;
         $member->name_sei = $input['name_sei'];
         $member->name_mei = $input['name_mei'];
         $member->nickname = $input['nickname'];
         $member->gender = $input['gender'];
         $password = $input['password'];
-        $hashed = Hash::make($password,['rounds' => 12,]);
-        $member->password = $hashed;
+            $hashed = Hash::make($password,['rounds' => 12,]);
+            $member->password = $hashed;
         $member->email = $input['email'];
 
-        // dd($member);
         $member->save();
         // $request->session()->regenerateToken();
-        // return view("signin.complete");
-        return redirect('signin/complete');
+        return view('signin.complete');
+        // return redirect('signin.complete');
     }
 
     /**

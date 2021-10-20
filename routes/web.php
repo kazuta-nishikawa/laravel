@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/member/index', 'MemberController@index')->name('member.index');
+
 // 登録フォーム
 Route::get('/signin', 'MemberController@create')->name('signin.create');
 Route::post('/signin/confirm', 'MemberController@confirm')->name('signin.confirm');
